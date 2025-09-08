@@ -1,12 +1,10 @@
 const fs = require("fs")
+const path = require("path")
 
 module.exports = {
     name: "about",
     async execute(sock, jid, msg, args, config) {
-        const banner = fs.readFileSync("./images/banner.jpg")
-
-        // Get user's name (pushName from WhatsApp)
-        const senderName = msg.pushName || "Friend"
+        const senderName = msg.pushName || "Friend";
 
         const caption = `
 👋 *Hello ${senderName}*  
@@ -15,13 +13,20 @@ module.exports = {
 
 ┌─「 *ABOUT BOT* 」
 │ 🤖 Bot   : ${config.botName}
-│ 👨‍💻 Owner : ${config.ownerNumber.join(", ")}
+│ 👨‍💻 Owner No : ${config.ownerNumber.join(", ")}
 │ 📌 Prefix : ${config.prefix}
 │ 📊 Version: 1.0
 │ 📅 Active : 24/7
 └───────────────⭕
-
         `
-        await sock.sendMessage(jid, { image: banner, caption })
+
+        // ✅ Use file path directly
+        await sock.sendMessage(jid, {
+            // image: { url: "./images/banner.jpg" },
+            // caption.trim();
+            image: { url: "./images/banner.jpg" }, // use a nice welcome image
+            caption: caption.trim()
+        })
     }
 }
+

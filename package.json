@@ -4,7 +4,7 @@
   "description": "Simple Whatsapp bot made by GGRiviya",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "GGRiviya",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "axios": "^1.11.0",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",
+    "qrcode": "^1.5.4",
     "qrcode-terminal": "^0.12.0"
   }
 }

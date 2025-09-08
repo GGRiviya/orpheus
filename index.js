@@ -1,11 +1,24 @@
 const { default: makeWASocket, useMultiFileAuthState } = require("@whiskeysockets/baileys")
 const fs = require("fs")
 const path = require("path")
+const qrcode = require("qrcode-terminal")   // ✅ add this
 const config = require("./config")
 
 async function startBot() {
     const { state, saveCreds } = await useMultiFileAuthState("session")
-    const sock = makeWASocket({ auth: state, printQRInTerminal: true })
+    const sock = makeWASocket({ auth: state })
+
+    // ✅ Handle QR Code properly
+    sock.ev.on("connection.update", (update) => {
+        const { qr, connection } = update
+        if (qr) {
+            console.log("📲 Scan the QR code below:")
+            qrcode.generate(qr, { small: true })   // ✅ shows a box QR in terminal
+        }
+        if (connection === "open") {
+            console.log("✅ Bot connected to WhatsApp")
+        }
+    })
 
     sock.ev.on("creds.update", saveCreds)
 
