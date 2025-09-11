@@ -4,7 +4,7 @@
   "description": "Simple Whatsapp bot made by GGRiviya",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon --ignore session --ignore images index.js"
   },
   "author": "GGRiviya",
   "license": "ISC",
